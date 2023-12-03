@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Flask App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Dodane style */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        #baner, #baner2, #stopka {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+        }
+
+            #baner h1 {
+                background: linear-gradient(to right, #dc3545, #28a745);
+                -webkit-background-clip: text;
+                color: transparent;
+                display: inline-block;
+                padding: 10px;
+            }
+
+        .navbar {
+            background-color: #007bff;
+        }
+
+        #lewy {
+            background-color: #f8d7da;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #prawy {
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .modal-content {
+            background-color: #cce5ff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="baner">
+            <h1>My Flask App</h1>
+        </div>
+    </header>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- PANEL LEWY (MENU) -->
+            <div id="lewy" class="col-md-3">
+                <h2>Menu</h2>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/oMnie">O mnie</a></li>
+                    <li><a href="/tabela">Tabela</a></li>
+                </ul>
+            </div>
+
+            <!-- PANEL PRAWY (BODY) -->
+            <div id="prawy" class="col-md-9">
+                <h2>Body</h2>
+                <div id="oMnieContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STOPKA -->
+    <div id="stopka" class="bg-dark text-center py-3 fixed-bottom">
+        Dawid Kocik V Sem Informatyka Niestacjonarna
+    </div>
+
+    <!-- Skrypty Bootstrapa -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function loadAboutMe() {
+            document.getElementById("oMnieContent").innerHTML = '<h2>O mnie</h2>' +
+                '<p>Imię Nazwisko</p>' +
+                '<a href="#" class="btn btn-success" onclick="showAlert(\'success\')">Success</a>' +
+                '<a href="#" class="btn btn-warning" onclick="showAlert(\'warning\')">Warning</a>' +
+                '<a href="#" class="btn btn-danger" onclick="showAlert(\'danger\')">Danger</a>';
+        }
+
+        function showAlert(type) {
+            var message;
+            switch (type) {
+                case 'success':
+                    message = 'Operacja zakończona sukcesem!';
+                    break;
+                case 'warning':
+                    message = 'Ostrzeżenie! Coś poszło nie tak.';
+                    break;
+                case 'danger':
+                    message = 'Błąd! Prosimy spróbować ponownie.';
+                    break;
+                default:
+                    message = 'Coś poszło nie tak.';
+            }
+
+            alert(message);
+        }
+    </script>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        &copy; 2023 My Flask App
+    </footer>
+</body>
+
+</html>
