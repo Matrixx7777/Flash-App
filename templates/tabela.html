@@ -1,26 +1,43 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>Table Page</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Surname</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>John</td>
-                <td>Doe</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jane</td>
-                <td>Smith</td>
-            </tr>
-        </tbody>
-    </table>
+<h2>Table Page</h2>
+
+<link href="https://unpkg.com/tabulator-tables@4.11.0/dist/css/tabulator.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.11.0/dist/js/tabulator.min.js"></script>
+
+<div id="example-table"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var table = new Tabulator("#example-table", {
+            data: [
+                { id: 1, name: "John", surname: "Doe" },
+                { id: 2, name: "Jane", surname: "Smith" }
+            ],
+            layout: "fitColumns",
+            columns: [
+                { title: "ID", field: "id", sorter: "number", width: 100 },
+                { title: "Name", field: "name", sorter: "string" },
+                { title: "Surname", field: "surname", sorter: "string" },
+            ],
+        });
+
+        // Filtering input
+        var filterInput = document.createElement("input");
+        filterInput.type = "text";
+        filterInput.placeholder = "Filter by Name";
+        filterInput.addEventListener("input", function (e) {
+            table.setFilter("name", "like", e.target.value);
+        });
+
+        document.getElementById("example-table").parentNode.insertBefore(filterInput, document.getElementById("example-table"));
+
+        // Sorting
+        table.setHeaderSortFunction(function (sorters) {
+            // Custom sorting logic if needed
+            return sorters;
+        });
+    });
+</script>
 {% endblock %}
